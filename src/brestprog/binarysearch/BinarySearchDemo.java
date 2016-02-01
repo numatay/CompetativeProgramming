@@ -1,6 +1,5 @@
 package brestprog.binarysearch;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +7,9 @@ import java.util.List;
  */
 public class BinarySearchDemo {
     public static void main(String[] args) {
-        List<Integer> l = new ArrayList<>();
+        //List<Integer> l = new ArrayList<>();
+
+        System.out.println(binarySearchSqrt(15));
 
 
     }
@@ -33,5 +34,23 @@ public class BinarySearchDemo {
         } else {
             return l;
         }
+    }
+    public static double binarySearchSqrt(double x) {
+        double l = 0, r = 1e9;
+
+        while (r - l > 1e-12) {
+            System.out.println(r-l);
+            double mid = (r + l) / 2;
+            double cur = mid * mid;
+
+            if (cur > x) {
+                r = mid;
+            } else if (cur < x) {
+                l = mid;
+            } else  {
+                return mid;
+            }
+        }
+        return l;
     }
 }
