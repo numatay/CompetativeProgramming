@@ -25,12 +25,10 @@ public class ProblemA {
 
         long sum = 0;
         for (int i = 0; i < n; i++) {
-            //System.out.println(i + "-h-" + h[i]);
             sum += cnk(h[i]);
         }
 
         for (int i = 0; i < n; i++) {
-            //System.out.println(i + "-v-" + v[i]);
             sum += cnk(v[i]);
         }
 
