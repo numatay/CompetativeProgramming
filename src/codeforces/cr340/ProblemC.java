@@ -2,8 +2,6 @@ package codeforces.cr340;
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ProblemC {
