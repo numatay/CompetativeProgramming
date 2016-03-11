@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class ProblemC {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        /*
         int n = in.nextInt();
         int[] xs = new int[n];
         int[] ys = new int[n];
@@ -35,5 +36,18 @@ public class ProblemC {
             }
         }
         System.out.println(cnt);
+
+        */
+        System.out.println(cn2(3));
+        System.out.println(cn2(5));
+        System.out.println(cn2(10));
+    }
+
+    public static long cn2(int n) {
+        long sum = 1;
+        for (int i = (n-2); i < n; i++) {
+            sum *= n;
+        }
+        return sum/2;
     }
 }
