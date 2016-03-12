@@ -1,5 +1,8 @@
 package codeforces.cr345;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -8,46 +11,85 @@ import java.util.Scanner;
 public class ProblemC {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        /*
         int n = in.nextInt();
-        int[] xs = new int[n];
-        int[] ys = new int[n];
+        Map<Integer, Integer> xs = new HashMap<>();
+        Map<Integer, Integer> ys = new HashMap<>();
+        Map<Pair, Integer> sum = new HashMap<>();
 
+        int x = 0;
+        int y = 0;
         for (int i = 0; i < n; i++) {
-            xs[i] = in.nextInt();
-            ys[i] = in.nextInt();
-        }
+            x = in.nextInt();
+            y = in.nextInt();
 
-
-        int cnt = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
-                if (xs[i] - xs[j] == 0) {
-                    cnt ++;
-                    continue;
-                }
-                if (ys[i] - ys[j] == 0) {
-                    cnt++;
-                    continue;
-                }
-                //System.out.println("Considering xs " + xs[i] + " " +  xs[j]);
-                //System.out.println("Considering ys " + ys[i] + " " +  ys[j]);
-
+            if (!xs.containsKey(x)) {
+                xs.put(x, 1);
+            } else {
+                xs.put(x, xs.get(x)+1);
             }
-        }
-        System.out.println(cnt);
+            if (!ys.containsKey(y)) {
+                ys.put(y, 1);
+            } else {
+                ys.put(y, ys.get(y)+1);
+            }
+            Pair p = new Pair(x, y);
+            if (!sum.containsKey(p)) {
+                sum.put(p, 1);
+            } else {
+                sum.put(p, sum.get(p)+1);
+            }
 
-        */
-        System.out.println(cn2(3));
-        System.out.println(cn2(5));
-        System.out.println(cn2(10));
+        }
+
+        long cntX = 0;
+        for (Integer val: xs.values()) {
+            cntX += cn2(val);
+        }
+        long cntY = 0;
+        for (Integer val: ys.values()) {
+            cntY += cn2(val);
+        }
+        long cntSum = 0;
+        for (Integer val: sum.values()) {
+            cntSum += cn2(val);
+        }
+
+        long cnt = cntX + cntY - cntSum;
+
+
+        System.out.println(cnt);
     }
 
     public static long cn2(int n) {
         long sum = 1;
-        for (int i = (n-2); i < n; i++) {
-            sum *= n;
+        for (int i = n; i > n-2; i--) {
+            sum *= i;
         }
         return sum/2;
+    }
+}
+
+class Pair {
+    public int a;
+    public int b;
+
+    public Pair() {
+        new NoSuchMethodException();
+    }
+
+    public Pair(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public int hashCode() {
+        return Objects.hash(this.a, this.b);
+    }
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (!(o instanceof Pair)) return false;
+        Pair p = (Pair) o;
+        if (this.a == p.a && this.b == p.b) { return true; }
+        else { return false; }
     }
 }
