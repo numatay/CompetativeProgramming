@@ -40,20 +40,7 @@ public class ProblemB {
             for (int i = n - 1; i > 0; i--){
                 sum += i;
             }
-
-
-            int delta = 0;
-            //if times even
-            if (times % 2 == 1) {
-                delta = 1;
-            }
-
-            sum -= delta;
-            if (sum < 0) {
-                sum = 0;
-            }
         }
-        //System.out.println("times " + times);
         System.out.println(sum);
     }
 }
