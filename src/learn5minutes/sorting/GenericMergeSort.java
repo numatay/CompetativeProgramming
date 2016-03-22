@@ -1,4 +1,4 @@
-package learn5minutes;
+package learn5minutes.sorting;
 
 /**
  * Created by mcnr on 3/22/16.

@@ -1,4 +1,4 @@
-package learn5minutes;
+package learn5minutes.sorting;
 
 import java.util.Arrays;
 
