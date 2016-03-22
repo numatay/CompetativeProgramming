@@ -20,52 +20,45 @@ public class ProblemA {
         int score;
 
 
-        String maybeWinner = null;
-        int maxScore = Integer.MIN_VALUE;
-        int curScore = 0;
-
-        Map<String, Map.Entry<String, Integer>> hm = new HashMap<>();
-        List<String> lst = new ArrayList<>();
+        Map<String, Integer> hm = new HashMap<>();
+        List<Map.Entry<String, Integer>> hist = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             name = in.next();
             score = in.nextInt();
 
-            curScore = updateRound(hm, name, score, i);
+            updateRound(hm, name, score, hist);
         }
 
-
-        List<String> winners = new ArrayList<>();
+        String maybeWinner = null;
+        String winner = null;
+        int maxScore = Integer.MIN_VALUE;
         int counter = 1;
-        for (Map.Entry<String, Integer> tuple: hm.values()) {
 
-            score = tuple.getValue();
-            if (score > maxScore) {
-                maxScore = score;
+        for (Integer curScore: hm.values()) {
+            if (curScore > maxScore) {
+                maxScore = curScore;
                 counter = 1;
-            } else if (score == maxScore) {
+            } else if (curScore == maxScore) {
                 counter++;
             }
         }
 
-        for (Map.Entry<String, Integer> tuple: hm.values()) {
-            score = tuple.getValue();
-            if (score == maxScore) { winners.add(tuple.getKey()); }
-        }
+        Collections.reverse(hist);
 
-        int min = Integer.MAX_VALUE;
-        String lines[];
-        String winner = "";
-        for (String line: winners) {
-            lines = line.split(" ");
-            int x = Integer.parseInt(lines[1]);
-            //out.println(lines[0]);
-            //out.println(lines[1]);
-            if (x < min) {
-                winner = new String(lines[0]);
-                min = x;
+        for (int i = hist.size()-1; i >= 0; i--) {
+            Map.Entry<String, Integer> t = hist.get(i);
+            maybeWinner = t.getKey();
+            score = t.getValue();
+            if (score == maxScore && hm.get(maybeWinner) == maxScore) {
+                counter--;
+            }
+            if (counter == 0) {
+                winner = maybeWinner;
+                break;
             }
         }
+
 
 
         out.print(winner);
@@ -75,19 +68,15 @@ public class ProblemA {
         out.close();
     }
 
-    public static int updateRound(Map<String, Map.Entry<String, Integer>> bag, String name, int score, int clock) {
-        int sum = score;
-        Map.Entry<String, Integer> tuple;
+    public static void updateRound(Map<String, Integer> bag, String name, int score, List<Map.Entry<String, Integer>> hist) {
+        int curScore = 0;
         if (!bag.containsKey(name)) {
-            tuple = new AbstractMap.SimpleEntry<>(name + " " + clock, score);
-            bag.put(name, tuple);
+            bag.put(name, score);
         } else {
-            tuple = bag.get(name);
-            sum = tuple.getValue() + score;
-            tuple.setValue(sum);
-            bag.put(name, tuple);
+            curScore = bag.get(name);
+            bag.put(name, curScore + score);
         }
-        return sum;
+        hist.add(new AbstractMap.SimpleEntry<>(name, curScore + score));
     }
 
 
