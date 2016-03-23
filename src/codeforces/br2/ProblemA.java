@@ -19,7 +19,6 @@ public class ProblemA {
         String name;
         int score;
 
-
         Map<String, Integer> hm = new HashMap<>();
         List<Map.Entry<String, Integer>> hist = new ArrayList<>();
 
@@ -31,38 +30,22 @@ public class ProblemA {
         }
 
         String maybeWinner = null;
-        String winner = null;
         int maxScore = Integer.MIN_VALUE;
-        int counter = 1;
 
         for (Integer curScore: hm.values()) {
-            if (curScore > maxScore) {
-                maxScore = curScore;
-                counter = 1;
-            } else if (curScore == maxScore) {
-                counter++;
-            }
+            maxScore = Math.max(maxScore, curScore);
         }
 
-        Collections.reverse(hist);
+        List<String> winners = new ArrayList<>();
 
-        for (int i = hist.size()-1; i >= 0; i--) {
-            Map.Entry<String, Integer> t = hist.get(i);
+        for (Map.Entry<String, Integer> t: hist) {
             maybeWinner = t.getKey();
             score = t.getValue();
-            if (score == maxScore && hm.get(maybeWinner) == maxScore) {
-                counter--;
-            }
-            if (counter == 0) {
-                winner = maybeWinner;
-                break;
-            }
+            if (score >= maxScore && !winners.contains(maybeWinner) && hm.get(maybeWinner) == maxScore)
+                winners.add(maybeWinner);
         }
 
-
-
-        out.print(winner);
-
+        out.print(winners.get(0));
 
         // release resources
         out.close();
