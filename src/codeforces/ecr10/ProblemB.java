@@ -15,54 +15,28 @@ public class ProblemB {
 
         // solution
         int n = in.nextInt();
-        Map<Integer, Integer> hm = new HashMap<>();
-        Set<Integer> ts = new TreeSet<>();
+        int[] a = new int[n];
 
-        int x;
-        int v;
         for (int i = 0; i < n; i++) {
-            x = in.nextInt();
-            ts.add(x);
-            if (!hm.containsKey(x)) {
-                hm.put(x, 1);
-            } else {
-                v = hm.get(x);
-                hm.put(x, v+1);
-            }
+            a[i] = in.nextInt();
         }
 
 
-        List<Integer> keys = new ArrayList();
-        int qq;
-        for (Integer q: ts) {
-            qq = hm.get(q);
-            for (int i = qq; i > 0; i--)
-                keys.add(q);
-        }
+        int l = 0, r = a.length-1;
 
-        int l = 0, r = keys.size()-1;
-
-        boolean hasKeys = true;
-
-        //out.println(hm);
-
+        Arrays.sort(a);
         int c = 0;
-
         while (l <= r) {
             if (c % 2 == 0) {
-                System.out.print(keys.get(l));
+                out.print(a[l]);
                 l++;
             } else {
-                System.out.print(keys.get(r));
+                out.print(a[r]);
                 r--;
             }
-            System.out.print(" ");
+            out.print(" ");
             c++;
         }
-
-
-
-
 
         // release resources
         out.close();
