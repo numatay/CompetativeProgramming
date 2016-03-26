@@ -23,18 +23,12 @@ public class ProblemA {
         int a = in.nextInt();
         int b = in.nextInt();
 
-        // error case
-        if (a < b) {
-            System.out.println(-1);
-            return;
-        }
 
         h1 -= (a * 4);
-
         int dist = h2 - h1;
-        // infinity case
 
-        if (a == b && dist > 12) {
+        // infinity case
+        if (a <= b && dist > 12) {
             System.out.println(-1);
             return;
         }
