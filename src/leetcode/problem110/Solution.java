@@ -1,15 +1,13 @@
 package leetcode.problem110;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Nurgissa on 3/29/2016.
  *
  * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
+ *
  */
 public class Solution {
     public boolean isBalanced(TreeNode root) {
@@ -28,6 +26,13 @@ public class Solution {
         r = getHeight(root.right, bag) + 1;
         if (Math.abs(l-r) > 1) bag.add(1);
         return Math.max(l,r);
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
     }
 
 
