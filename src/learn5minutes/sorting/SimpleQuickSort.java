@@ -24,12 +24,17 @@ public class SimpleQuickSort {
     private static void quickSort(int[] lst, int l, int r) {
         if (l >= r) return;
 
-        int idx = partitionRhs(lst, l, r);
+        int idx = partition(lst, l, r);
         quickSort(lst, l, idx-1);
         quickSort(lst, idx+1, r);
     }
 
-    private static int partitionRhs(int[] lst, int l, int r) {
+    private static int partition(int[] lst, int l, int r) {
+        // pre-processing step
+        int x = lst[(r+l)/2];
+        lst[(r+l)/2] = lst[r];
+        lst[r] = x;
+
         int pivot = lst[r];
 
         int tmp;
@@ -50,31 +55,4 @@ public class SimpleQuickSort {
 
         return i+1;
     }
-
-    private static int partitionLhs(int[] lst, int l, int r) {
-        int pivot = lst[l];
-
-        int tmp;
-        int i = r + 1;
-        for (int j = r; j > l; j--) {
-            if (lst[j] >= pivot) {
-                i--;
-                tmp = lst[j];
-                lst[j] = lst[i];
-                lst[i] = tmp;
-            }
-        }
-        tmp = lst[i-1];
-        lst[i-1] = pivot;
-        lst[l] = tmp;
-
-        return i-1;
-    }
-
-    private static int partitionMid(int[] lst, int l, int r) {
-        throw new NotImplementedException();
-    }
-
-
-
 }
