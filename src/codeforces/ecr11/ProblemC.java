@@ -21,30 +21,47 @@ public class ProblemC {
         for (int i = 0; i < n; i++)
             a[i] = in.nextInt();
 
-        List<Integer> seq = new ArrayList<>();
-        List<Integer> idxs = new ArrayList<>();
+        int l = 0, r = 0;
+        int max_idx = 0;
+        int max = 0;
+        int kk = k;
+        while (k != 0 && r < n) {
+            for (; r < n; ) {
+                if (r < n && a[r] == 1) r++;
+                if (r < n && a[r] == 0  && kk != 0) { r++; kk--; }
+                if (r < n && a[r] == 0  && kk == 0) break;
+            }
+            if (r-l > max) {
+                max = (r-l);
+                max_idx = l;
+            }
+            if (r >= n) break;
+            //out.println("moving  right l: " + l + " r: " + r + " kk: " + kk);
+            for (; l < r; ) {
+                if (l < n && a[l] == 1 && kk == 0) l++;
+                if (l < n && a[l] == 1 && kk != 0) break;
+                if (l < n && a[l] == 0) { l++; kk++; }
+            }
+            //out.println("moving left l: " + l + " r: " + r + " kk: " + kk);
+        }
 
+        if (k == 0) {
+            for (int i = 0; i < n; i++) {
+                int c = 0;
+                if (a[i] == 1) {
+                    for (c = 0; i < n && a[i] == 1; i++) {c++;}
+                    max = Math.max(max, c);
+                }
+            }
+        }
+
+        out.println(max);
         for (int i = 0; i < n; i++) {
-            int c = 0;
-            if (a[i] == 0) {
-                for(c = 0; i < n && a[i] == 0; i++) {c++;}
-                seq.add(c);
-                idxs.add(i-c);
-            }
+            if (k != 0 && i >= max_idx && i < max + max_idx) { out.print(1 + " "); continue; }
+            out.print(a[i] + " ");
         }
 
-        out.print(seq);
-        out.print(idxs);
-
-        for (int i = 1; i < k; i++) {
-            for (int j = 0; j < seq.size(); j++) {
-                if (seq.get(j) == i)
-            }
-        }
-
-
-
-        // release resources
+       // release resources
         out.close();
     }
 
