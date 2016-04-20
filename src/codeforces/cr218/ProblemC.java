@@ -1,59 +1,54 @@
 package codeforces.cr218;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 /**
  * Created by ABiryulin on 1/30/2016.
  */
 public class ProblemC {
     public static void main(String[] args) throws Exception {
-        solve();
+        InputReader in = new InputReader(System.in);
+        String input = in.next();
+
+        int nb = in.nextInt();
+        int ns = in.nextInt();
+        int nc = in.nextInt();
+        int pb = in.nextInt();
+        int ps = in.nextInt();
+        int pc = in.nextInt();
+        long r = in.nextLong();
+
+
+
     }
 
-    public static void solve() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //BufferedReader br = new BufferedReader(new FileReader("in.txt"));
-        String line = br.readLine();
-        int nb, ns, nc;
-        int pb, ps, pc;
-        long r = 0;
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
 
-        String[] vals = br.readLine().split(" ");
-        nb = Integer.parseInt(vals[0]);
-        ns = Integer.parseInt(vals[1]);
-        nc = Integer.parseInt(vals[2]);
-
-        vals = br.readLine().split(" ");
-        pb = Integer.parseInt(vals[0]);
-        ps = Integer.parseInt(vals[1]);
-        pc = Integer.parseInt(vals[2]);
-
-        r = Long.parseLong(br.readLine());
-
-        int cost = 0;
-        int c1=0, c2=0, c3=0;
-
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == 'B') {
-                cost += pb;
-                c1 = 1;
-            } else if (line.charAt(i) == 'S') {
-                cost += ps;
-                c2 = 1;
-            } else {
-                cost += pc;
-                c3 = 1;
-            }
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
         }
-        long sum = nb*pb*c1 + ns*ps*c2 + nc*pc*c3 + r;
-        //System.out.println(cost);
-        //System.out.println(sum);
 
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
 
+        public int nextInt() { return Integer.parseInt(next()); }
 
-        System.out.println(sum / cost);
-
-
+        public long nextLong() { return Long.parseLong(next()); }
     }
+
 }
