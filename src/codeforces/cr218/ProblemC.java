@@ -22,8 +22,44 @@ public class ProblemC {
         int pc = in.nextInt();
         long r = in.nextLong();
 
+        int cb = 0, cs = 0, cc = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'B') { cb++; }
+            else if (input.charAt(i) == 'S') { cs++; }
+            else { cc++; }
+        }
 
+        if (cb > 0) r += nb * pb;
+        if (cs > 0) r += ns * ps;
+        if (cc > 0) r += nc * pc;
 
+        //System.out.println(r);
+
+        long lt = 1, mid = 0, rt = r * 7;
+        boolean ret = true;
+        while (lt < rt && rt+1 != mid) {
+            mid = (rt + lt)/2;
+
+            if (canBuy(cb, cs, cc, pb, ps, pc, r, mid)) {
+                lt = mid;
+            } else {
+                rt = mid;
+            }
+
+        }
+        System.out.println(Math.min(lt, mid));
+        System.out.println(rt);
+        System.out.println(mid);
+
+    }
+
+    private static boolean canBuy(int tb, int ts, int tc, int b, int s, int c, long r, long count) {
+        long price = (tb * b + ts * s + tc * c ) * count;
+        //System.out.println("price: " + price);
+        if (r - price > 0)
+            return true;
+        else
+            return false;
     }
 
     static class InputReader {
