@@ -30,18 +30,18 @@ public class ProblemC {
             else { cc++; }
         }
 
-        long lt = 0L, rt = 1000000000000L;
-        while (rt - lt > 1) {
+        long lt = 0L, rt = 10000000000000L;
+        while (lt < rt) {
             long mid  = (rt + lt) / 2;
             if (canBuy(cb, cs, cc, nb, ns, nc, pb, ps, pc, r, mid)) {
-                lt = mid;
+                lt = mid + 1;
             } else {
                 rt = mid;
             }
 
         }
 
-        System.out.println(lt);
+        System.out.println(lt-1);
     }
 
     public static boolean canBuy(int cb, int cs, int cc, int nb, int ns, int nc, int pb, int ps, int pc, long sum, long cnt) {
