@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
 /**
@@ -29,38 +30,25 @@ public class ProblemC {
             else { cc++; }
         }
 
-        if (cb > 0) r += nb * pb;
-        if (cs > 0) r += ns * ps;
-        if (cc > 0) r += nc * pc;
-
-        //System.out.println(r);
-
-        long lt = 1, mid = 0, rt = r * 7;
-        boolean ret = true;
-        while (lt < rt && rt+1 != mid) {
-            mid = (rt + lt)/2;
-
-            if (canBuy(cb, cs, cc, pb, ps, pc, r, mid)) {
+        long lt = 0L, rt = 1000000000000L;
+        while (rt - lt > 1) {
+            long mid  = (rt + lt) / 2;
+            if (canBuy(cb, cs, cc, nb, ns, nc, pb, ps, pc, r, mid)) {
                 lt = mid;
             } else {
                 rt = mid;
             }
 
         }
-        System.out.println(Math.min(lt, mid));
-        System.out.println(rt);
-        System.out.println(mid);
 
+        System.out.println(lt);
     }
 
-    private static boolean canBuy(int tb, int ts, int tc, int b, int s, int c, long r, long count) {
-        long price = (tb * b + ts * s + tc * c ) * count;
-        //System.out.println("price: " + price);
-        if (r - price > 0)
-            return true;
-        else
-            return false;
+    public static boolean canBuy(int cb, int cs, int cc, int nb, int ns, int nc, int pb, int ps, int pc, long sum, long cnt) {
+        long b = Math.max(0,(cb * cnt - nb) * pb) + Math.max(0,(cs * cnt - ns) * ps) + Math.max(0,(cc * cnt - nc) * pc);
+        return b <= sum;
     }
+
 
     static class InputReader {
         public BufferedReader reader;
