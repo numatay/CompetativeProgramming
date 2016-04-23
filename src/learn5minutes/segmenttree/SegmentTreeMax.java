@@ -1,4 +1,4 @@
-//package learn5minutes.segmenttree;
+package learn5minutes.segmenttree;
 
 import java.io.*;
 import java.util.HashMap;
