@@ -1,4 +1,4 @@
-//package mccme.dp;
+package mccme.dp;
 
 import java.io.*;
 import java.util.Arrays;
