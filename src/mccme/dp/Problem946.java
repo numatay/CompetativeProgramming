@@ -4,39 +4,30 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * Created by Nurgissa on 5/7/2016.
+ * Created by macnur on 5/8/16.
  */
-public class Problem2964 {
+public class Problem946 {
     public static void main(String[] args) {
         InputReader in = new InputReader(System.in);
         PrintWriter out = new PrintWriter(System.out);
 
         int n = in.nextInt();
         int m = in.nextInt();
+        int[][] dp = new int[n+1][m+1];
 
-        int[][] map = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                map[i][j] = in.nextInt();
+        dp[1][1] = 1;
+        for (int i = 2; i < n+1; i++) {
+            for (int j = 2; j < m+1; j++) {
+                dp[i][j] = dp[i-2][j-1] + dp[i-1][j-2];
             }
         }
 
-        for (int i = 1; i < m; i++) { map[0][i] &= map[0][i-1]; }
-        for (int i = 1; i < n; i++) { map[i][0] &= map[i-1][0]; }
 
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                if (map[i][j] == 0) { continue; }
-                map[i][j] = map[i-1][j] + map[i][j-1];
-            }
-        }
+        out.println(dp[n][m]);
 
-        out.println(map[n-1][m-1] == 0 ? "Impossible" : map[n-1][m-1]);
 
         // release resources
         out.close();
-
-
     }
 
     static class InputReader {
