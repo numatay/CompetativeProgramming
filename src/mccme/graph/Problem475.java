@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 /**
  * Created by @umatayn on 9/2/2016.
  */
-public class Problem470 {
+public class Problem475 {
     public static void main(String[] args) {
         // initialize resources
         InputReader in = new InputReader(System.in);
@@ -14,20 +14,24 @@ public class Problem470 {
 
         // solution
         int n = in.nextInt();
-        int[] a = new int[n+1];
+        int[] degree = new int[n+1];
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                int u = in.nextInt();
-                if (u == 1) {
-                    a[j]++;
-                }
+        int m = in.nextInt();
+
+        for (int i = 0; i < m; i++) {
+            int u = in.nextInt();
+            int v = in.nextInt();
+            degree[u]++;
+            degree[v]++;
+        }
+
+        for (int i = 2; i < n; i++) {
+            if (degree[i] != degree[i-1]) {
+                System.out.println("NO");
             }
         }
+        System.out.println("YES");
 
-        for (int j = 1; j <= n; j++) {
-            System.out.println(a[j]);
-        }
         // release resources
         out.close();
     }

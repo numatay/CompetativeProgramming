@@ -1,4 +1,4 @@
-//package mccme.graph;
+package mccme.graph;
 
 import java.io.*;
 import java.util.StringTokenizer;

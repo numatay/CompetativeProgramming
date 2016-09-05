@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 /**
  * Created by @umatayn on 9/2/2016.
  */
-public class Problem470 {
+public class Problem474 {
     public static void main(String[] args) {
         // initialize resources
         InputReader in = new InputReader(System.in);
@@ -14,20 +14,44 @@ public class Problem470 {
 
         // solution
         int n = in.nextInt();
-        int[] a = new int[n+1];
+        int[] inner = new int[n+1];
+        int[] outer = new int[n+1];
+
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-                int u = in.nextInt();
-                if (u == 1) {
-                    a[j]++;
+                int val = in.nextInt();
+                if (val == 1) {
+                    outer[i]++;
+                    inner[j]++;
                 }
             }
         }
 
-        for (int j = 1; j <= n; j++) {
-            System.out.println(a[j]);
+        int cOut = 0;
+        for (int i = 1; i <= n; i++) {
+            if (inner[i] == 0) { cOut++; }
         }
+
+        System.out.println(cOut);
+        for (int i = 1; i <= n; i++) {
+            if (inner[i] == 0) {
+                System.out.println(i);
+            }
+        }
+
+        int cIn = 0;
+        for (int i = 1; i <= n; i++) {
+            if (outer[i] == 0) { cIn++; }
+        }
+
+        System.out.println(cIn);
+        for (int i = 1; i <= n; i++) {
+            if (outer[i] == 0) {
+                System.out.println(i);
+            }
+        }
+
         // release resources
         out.close();
     }
