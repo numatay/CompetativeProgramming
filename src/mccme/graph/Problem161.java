@@ -1,4 +1,4 @@
-//package mccme.graph;
+package mccme.graph;
 
 import java.io.*;
 import java.util.*;
@@ -88,8 +88,6 @@ public class Problem161 {
         int src = map[x1-1][y1-1];
         int dst = map[x2-1][y2-1];
 
-//        System.out.println("src:" + src + " dst:" + dst);
-
         Queue<Integer> q = new LinkedList<>();
         q.add(src);
         used[src] = true;
@@ -99,11 +97,9 @@ public class Problem161 {
         while (!q.isEmpty()) {
             int u = q.element();
             q.remove();
-//            System.out.println("popped " + u);
             List<Integer> vs = g[u];
-//            System.out.println(vs);
             for (Integer v: vs) {
-                if (!used[v]) {
+                if (!used[v] || (dist[v] > dist[u] + 1)) {
                     q.add(v);
                     used[v] = true;
                     dist[v] = dist[u] + 1;
@@ -118,14 +114,9 @@ public class Problem161 {
             path.add(0, v);
         }
         for (Integer l: path) {
-            System.out.println((l / n + 1) + " " + (l % n));
+            l--;
+            System.out.println((l / n + 1) + " " + (l % n + 1));
         }
-
-
-
-//        for (int i = 1; i < g.length; i++) {
-//            System.out.println(i + "->" + g[i]);
-//        }
 
         // release resources
         out.close();
