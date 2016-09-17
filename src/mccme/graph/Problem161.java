@@ -1,4 +1,4 @@
-package mccme.graph;
+//package mccme.graph;
 
 import java.io.*;
 import java.util.*;
@@ -33,6 +33,7 @@ public class Problem161 {
         dist = new int[size+1];
         p = new int[size+1];
         used = new boolean[size+1];
+        int[][] map = new int[n][n];
 
         int x1 = in.nextInt();
         int y1 = in.nextInt();
@@ -40,59 +41,67 @@ public class Problem161 {
         int x2 = in.nextInt();
         int y2 = in.nextInt();
 
-        for (int i = 1; i <= size; i++) {
-            g[i] = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            g[i+1] = new ArrayList<>();
+            map[i/n][i%n] = i+1;
         }
 
         for (int i = 0; i < n; i++) {
-            for (int j = 1; j <= n; j++) {
-                int src = i*n + j;
-                int dst = (i+1) * n + (j+2);
-                if (dst > 0 && dst <= n*n) {
-                    g[src].add(dst);
-                    g[dst].add(src);
+            for (int j = 0; j < n; j++) {
+                if (i + 2 >= n || j + 1 >= n) {
+                    continue;
                 }
+                int src = map[i][j];
+                int dst = map[i + 2][j + 1];
+                g[src].add(dst);
+                g[dst].add(src);
             }
-            for (int j = 1; j <= n; j++) {
-                int src = i*n + j;
-                int dst = (i+2) * n + (j+1);
-                if (dst > 0 && dst <= n*n) {
-                    g[src].add(dst);
-                    g[dst].add(src);
+            for (int j = 0; j < n; j++) {
+                if (i + 1 >= n || j + 2 >= n) {
+                    continue;
                 }
+                int src = map[i][j];
+                int dst = map[i + 1][j + 2];
+                g[src].add(dst);
+                g[dst].add(src);
             }
-            for (int j = 1; j <= n; j++) {
-                int src = i*n + j;
-                int dst = (i+1) * n + (j-2);
-                if (dst > 0 && dst <= n*n) {
-                    g[src].add(dst);
-                    g[dst].add(src);
+            for (int j = 0; j < n; j++) {
+                if (i + 1 >= n || j - 2 < 0) {
+                    continue;
                 }
+                int src = map[i][j];
+                int dst = map[i + 1][j - 2];
+                g[src].add(dst);
+                g[dst].add(src);
             }
-            for (int j = 1; j <= n; j++) {
-                int src = i*n + j;
-                int dst = (i+2) * n + (j-1);
-                if (dst > 0 && dst <= n*n) {
-                    g[src].add(dst);
-                    g[dst].add(src);
+            for (int j = 0; j < n; j++) {
+                if (i + 2 >= n || j - 1 < 0) {
+                    continue;
                 }
+                int src = map[i][j];
+                int dst = map[i + 2][j - 1];
+                g[src].add(dst);
+                g[dst].add(src);
             }
         }
 
-        int src = (x1-1)*n + y1;
-        int dst = (x2-1)*n + y2;
+        int src = map[x1-1][y1-1];
+        int dst = map[x2-1][y2-1];
+
+//        System.out.println("src:" + src + " dst:" + dst);
 
         Queue<Integer> q = new LinkedList<>();
         q.add(src);
-        p[src] = -1;
         used[src] = true;
         dist[src] = 0;
+        p[src] = -1;
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int u = q.element();
-            System.out.println("popped from stack " + u);
             q.remove();
+//            System.out.println("popped " + u);
             List<Integer> vs = g[u];
+//            System.out.println(vs);
             for (Integer v: vs) {
                 if (!used[v]) {
                     q.add(v);
@@ -103,16 +112,20 @@ public class Problem161 {
             }
         }
 
-        System.out.println(src);
-        System.out.println(dst);
         System.out.println(dist[dst]);
-
-        for (int i = 1; i < dist.length; i++) {
-            System.out.println(i + "=" + dist[i]);
-            System.out.println(g[i]);
+        List<Integer> path = new LinkedList<>();
+        for (int v = dst; v != -1; v = p[v]) {
+            path.add(0, v);
+        }
+        for (Integer l: path) {
+            System.out.println((l / n + 1) + " " + (l % n));
         }
 
 
+
+//        for (int i = 1; i < g.length; i++) {
+//            System.out.println(i + "->" + g[i]);
+//        }
 
         // release resources
         out.close();
