@@ -1,4 +1,4 @@
-//package acmp.problem11;
+package acmp.problem11;
 
 import java.io.*;
 import java.util.StringTokenizer;
