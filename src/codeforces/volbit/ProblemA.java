@@ -1,0 +1,33 @@
+package codeforces.volbit;
+
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+
+/**
+ * Created by umatayn on 11/1/16.
+ */
+public class ProblemA {
+    public static void main(String[] args) {
+        new Thread(null, new Runnable() {
+            @Override
+            public void run() {
+                ProblemA.run();
+            }
+        }, "solution", 1 << 23).start();
+    }
+
+    public static void run() {
+        // initialize resources
+        Scanner in = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+
+        long n = in.nextLong();
+
+
+        out.print((int) (5 * 5 * Math.pow(5, (n % 2)) % 100));
+
+        // release resources
+        out.close();
+    }
+}
