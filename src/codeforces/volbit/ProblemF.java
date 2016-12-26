@@ -25,15 +25,20 @@ public class ProblemF {
 
         long n = in.nextLong();
 
-        BigInteger b1 = BigInteger.valueOf(n);
+//        BigInteger b1 = BigInteger.valueOf(n);
+//
+//        BigInteger sum = b1.multiply(BigInteger.valueOf(n -1)).multiply(BigInteger.valueOf(n -2))
+//                .multiply(BigInteger.valueOf(n -3)).multiply(BigInteger.valueOf(n -4)).multiply(BigInteger.valueOf(n*n - 4*n + 37)).divide(BigInteger.valueOf(5040));
+//
+//        out.print(sum.toString());
 
-        BigInteger sum = b1.multiply(BigInteger.valueOf(n -1)).multiply(BigInteger.valueOf(n -2))
-                .multiply(BigInteger.valueOf(n -3)).multiply(BigInteger.valueOf(n -4)).multiply(BigInteger.valueOf(n*n - 4*n + 37)).divide(BigInteger.valueOf(5040));
+        /* answer */
+        long cn5 = 1L * n * (n-1) * (n-2) * (n-3) * (n-4) / (1 * 2 * 3 * 4 * 5);
+        long cn6 = cn5 * (n-5L) / 6;
+        long cn7 = cn6 * (n-6L) / 7;
 
 
-
-        //out.print((1L * n * (n-1) * (n-2) * (n-3) * (n-4) * (1L * n*n - 4 * n + 37))/5040);
-        out.print(sum.toString());
+        out.print(cn5 + cn6 + cn7);
 
         // release resources
         out.close();
