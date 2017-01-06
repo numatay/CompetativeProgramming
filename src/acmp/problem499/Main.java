@@ -29,12 +29,14 @@ public class Main {
     int a3 = in.nextInt();
     int b3 = in.nextInt();
 
-    if (a1 + a2 <= w && b1 + b2 >= k) {
-        out.print("YES");
+    if ((a1 <= w && b1 >= k) || (a2 <= w && b2 >= k) || (a3 <= w && b3 >= k)) {
+      out.print("YES");
+    } else if (a1 + a2 <= w && b1 + b2 >= k) {
+      out.print("YES");
     } else if (a1 + a3 <= w && b1 + b3 >= k) {
-        out.print("YES");
+      out.print("YES");
     } else if (a2 + a3 <= w && b2 + b3 >= k) {
-        out.print("YES");
+      out.print("YES");
     } else if (a1 + a2 + a3 <= w && b1 + b2 + b3 >= k) {
       out.print("YES");
     } else {
