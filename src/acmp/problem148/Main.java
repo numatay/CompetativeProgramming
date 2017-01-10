@@ -1,4 +1,4 @@
-//package acmp.problem148;
+package acmp.problem148;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -16,17 +16,14 @@ public class Main {
     long a = in.nextLong();
     long b = in.nextLong();
 
-//    while (b != 0) {
-//      long t = b;
-//      b = a % b;
-//      a = t;
-//    }
-//
-//    out.print(a);
+    while (b != 0) {
+      long t = b;
+      b = a % b;
+      a = t;
+    }
 
-    long ret = gcd(a, b);
+    out.print(a);
 
-    out.print(ret);
     out.close();
   }
 
