@@ -1,4 +1,4 @@
-package hackerrank.graphs.strings;
+package hackerrank.strings;
 
 import java.util.*;
 /**

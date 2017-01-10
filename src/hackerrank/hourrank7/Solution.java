@@ -1,4 +1,4 @@
-package hackerrank.graphs.hourrank7;
+package hackerrank.hourrank7;
 
 import java.io.*;
 import java.util.*;

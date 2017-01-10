@@ -1,4 +1,4 @@
-package hackerrank.graphs.wc28;
+package hackerrank.wc28;
 
 import java.util.*;
 
