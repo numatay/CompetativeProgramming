@@ -1,4 +1,4 @@
-package acmp.problem148;
+//package acmp.problem148;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -8,30 +8,34 @@ import java.util.Scanner;
  */
 public class Main {
   public static void main(String[] args) {
-    new Thread(null,
-            () -> new Main().run(), "solution", 1 << 23).start();
-  }
-
-  public void run() {
     // initialize resources
     Scanner in = new Scanner(System.in);
     PrintWriter out = new PrintWriter(System.out);
 
     // solution
-    int a = in.nextInt();
-    int b = in.nextInt();
+    long a = in.nextLong();
+    long b = in.nextLong();
 
-    int limit = Math.min(a, Math.min(b, Math.abs(a - b)));
-    int x = 1;
-    for (int i = 1; i <= limit; i++) {
-      if (a % i == 0 && b % i == 0) {
-        x = i;
-      }
-    }
+//    while (b != 0) {
+//      long t = b;
+//      b = a % b;
+//      a = t;
+//    }
+//
+//    out.print(a);
 
-    out.print(x);
+    long ret = gcd(a, b);
 
-    // release resources
+    out.print(ret);
     out.close();
   }
+
+  public static long gcd(long a, long b) {
+    if (b == 0) {
+      return a;
+    } else {
+      return gcd(b, a % b);
+    }
+  }
 }
+
