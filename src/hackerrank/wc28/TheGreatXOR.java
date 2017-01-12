@@ -7,7 +7,7 @@ import java.util.*;
  * Created by umatay on 1/10/17.
  */
 
-public class Solution {
+public class TheGreatXOR {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Solution {
             for (int i = 0; i < bits; i++) {
                 if (((1L << i) & x) == 0) {
                     //System.out.println(i);
-                    c += (1 << i);
+                    c += (1L << i);
                 }
             }
 
