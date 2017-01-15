@@ -19,32 +19,56 @@ public class Main {
         // solution
         int n = in.nextInt();
 
-        int ascVal = 0;
-        int descVal = 0;
+        int cnt = 0;
+        int delta, x = n;
+        while (true) {
+            int d4 = x % 10;
+            int d3 = (x / 10) % 10;
+            int d2 = (x / 100) % 10;
+            int d1 = x / 1000;
 
-        do {
-            int mask = 0;
-            int curVal = n;
-            System.err.println("before curVal " + curVal);
-            while (curVal > 0) {
-                int lsb = curVal % 10;
-                mask |= (1 << lsb);
-                curVal /= 10;
+            if (d1 < d2) {
+                d1 = d1 ^ d2;
+                d2 = d1 ^ d2;
+                d1 = d1 ^ d2;
             }
-            System.err.println("after curVal " + curVal);
-            System.err.println(mask);
-            ascVal = 0;
-            descVal = 0;
-            for (int i = 0; i < 10; i++) {
-                int checker = mask & (1 << i);
-                if (checker == 1) {
-                    ascVal += 7;
-                    ascVal *= 10;
-                }
+            if (d3 < d4) {
+                d3 = d3 ^ d4;
+                d4 = d3 ^ d4;
+                d3 = d3 ^ d4;
             }
-            System.err.println(ascVal);
+            if (d1 < d3) {
+                d1 ^= d3;
+                d3 ^= d1;
+                d1 ^= d3;
+            }
+            if (d2 < d3) {
+                d2 ^= d3;
+                d3 ^= d2;
+                d2 ^= d3;
+            }
+            if (d3 < d4) {
+                d3 ^= d4;
+                d4 ^= d3;
+                d3 ^= d4;
+            }
+            if (d2 < d3) {
+                d2 ^= d3;
+                d3 ^= d2;
+                d2 ^= d3;
+            }
 
-        } while (false);
+            int numDesc = d1 * 1000 + d2 * 100 + d3 * 10 + d4;
+            int numAcs = d4 * 1000 + d3 * 100 + d2 * 10 + d1;
+            delta = numDesc - numAcs;
+            if (delta == x) {
+                break;
+            }
+            cnt++;
+            x = delta;
+        }
+
+        out.print(x + "\n" + cnt);
 
         // release resources
         out.close();
