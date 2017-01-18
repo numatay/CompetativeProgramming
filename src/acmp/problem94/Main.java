@@ -21,15 +21,14 @@ public class Main {
     int m = in.nextInt();
     int k = in.nextInt();
 
-    int ans;
+
     if (n >= m) {
-      ans = 1;
-      out.print(ans);
+      out.print(1);
     } else {
       if (n <= k) {
         out.print("NO");
       } else {
-        ans = (m - n + n - k - 1) / (n - k) + 1;
+        int ans = (m - k - 1) / (n - k) + 1;
         out.print(ans);
       }
     }

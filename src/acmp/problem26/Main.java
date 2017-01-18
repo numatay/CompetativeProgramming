@@ -43,6 +43,19 @@ public class Main {
         } else {
             out.print("NO");
         }
+
+        /* Editorial solution
+
+            int d = (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1);
+
+            if (Math.abs(r1 - r2) <= d && d <= (r1 + r2)*(r1+r2)) {
+                out.print("YES");
+            } else {
+                out.print("NO");
+            }
+
+         */
+
         // release resources
         out.close();
     }

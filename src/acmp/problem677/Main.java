@@ -33,10 +33,10 @@ public class Main {
         if (x <= 0) {
             out.println(-1);
         } else {
-            if ((x / k) * k != x || (x / n) * n != x || (x / m) * m != x) {
-                out.print(-1);
-            } else {
+            if ((x % k == 0) && (x % n == 0) && (x % m != x)) {
                 out.println(x);
+            } else {
+                out.println(-1);
             }
         }
 
