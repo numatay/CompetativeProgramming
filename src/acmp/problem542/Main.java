@@ -29,6 +29,17 @@ public class Main {
 
         out.print(ans + (n << incr));
 
+        /* Editorial solution
+
+            int r = 0;
+            while(n != 0) {
+                int d = n % 2;
+                n /= 2;
+                r = r * 2 + d;
+            }
+
+         */
+
         // release resources
         out.close();
     }

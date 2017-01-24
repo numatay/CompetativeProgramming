@@ -32,6 +32,19 @@ public class Main {
             }
         }
 
+        /* Editorial solution
+
+            int p = a * b;
+            while(b != 0) {
+                int t = a % b;
+                a = b;
+                b = t;
+            }
+
+            out.println(p / a);
+
+         */
+
         out.print(ans);
 
         // release resources

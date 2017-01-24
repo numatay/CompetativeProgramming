@@ -21,14 +21,13 @@ public class Main {
 
         int l, sum = 0, prod = 1;
 
-        while(n >= k) {
+        while(n != 0) {
             l = n % k;
             n /= k;
             prod *= l;
             sum += l;
         }
-        prod *= n;
-        sum += n;
+
         out.print(prod - sum);
 
         // release resources
