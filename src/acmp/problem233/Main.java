@@ -1,14 +1,14 @@
-package templates;
+package acmp.problem233;
 
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 /**
  * Created by macnur on 28/01/17.
  */
-public class Skeleton {
+public class Main {
     public static void main(String[] args) {
-        new Thread(null, () -> new Skeleton().run(), "solution", 1 << 23).start();
+        new Thread(null, () -> new Main().run(), "solution", 1 << 23).start();
     }
 
     public void run() {
@@ -17,7 +17,21 @@ public class Skeleton {
         PrintWriter out = new PrintWriter(System.out);
 
         // solution
+        final int h = 437;
 
+        int n = in.nextInt();
+
+        for (int i = 1; i <= n; i++) {
+            int hi = in.nextInt();
+            if (hi <= h) {
+                out.print("Crash " + i);
+
+                out.close();
+                return;
+            }
+        }
+
+        out.print("No crash");
 
         // release resources
         out.close();

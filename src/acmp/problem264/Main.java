@@ -1,14 +1,14 @@
-package templates;
+package acmp.problem264;
 
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 /**
  * Created by macnur on 28/01/17.
  */
-public class Skeleton {
+public class Main {
     public static void main(String[] args) {
-        new Thread(null, () -> new Skeleton().run(), "solution", 1 << 23).start();
+        new Thread(null, () -> new Main().run(), "solution", 1 << 23).start();
     }
 
     public void run() {
@@ -17,7 +17,20 @@ public class Skeleton {
         PrintWriter out = new PrintWriter(System.out);
 
         // solution
+        int n = in.nextInt();
+        int strike = 0, max = 0;
 
+        for (int i = 0; i < n; i++) {
+            int ti = in.nextInt();
+            if (ti > 0) {
+                strike++;
+            } else {
+                strike = 0;
+            }
+            max = Math.max(max, strike);
+        }
+
+        out.print(max);
 
         // release resources
         out.close();
