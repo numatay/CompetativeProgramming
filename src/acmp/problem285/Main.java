@@ -1,14 +1,14 @@
-package templates;
+package acmp.problem285;
 
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
 /**
- * Created by macnur on xx/xx/17.
+ * Created by macnur on 28/01/17.
  */
-public class Skeleton {
+public class Main {
     public static void main(String[] args) {
-        new Thread(null, () -> new Skeleton().run(), "solution", 1 << 23).start();
+        new Thread(null, () -> new Main().run(), "solution", 1 << 23).start();
     }
 
     public void run() {
@@ -17,7 +17,32 @@ public class Skeleton {
         PrintWriter out = new PrintWriter(System.out);
 
         // solution
+        int n = in.nextInt();
+        int m = in.nextInt();
 
+        int max = 0, sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            int val = in.nextInt();
+            max = Math.max(max, val);
+            sum += (val-1);
+        }
+
+        if (max > m || (sum < m-1)) {
+            out.print("no");
+        } else {
+            out.print("yes");
+        }
+
+        /* Editorial solution
+
+            if (max <= m && m <= (sum - (n - 1))) {
+                out.print("yes");
+            } else {
+                out.print("no");
+            }
+
+         */
 
         // release resources
         out.close();
