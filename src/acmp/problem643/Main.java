@@ -1,10 +1,10 @@
-package acmp.problem296;
+package acmp.problem643;
 
 import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * Created by macnur on 03/02/17.
+ * Created by macnur on 2/01/17.
  */
 public class Main {
     public static void main(String[] args) {
@@ -12,15 +12,15 @@ public class Main {
     }
 
     private void solve(InputReader in, PrintWriter out) {
-
         int n = in.nextInt();
-
-        for (int i = 0; i <= n / 3; i++) {
-            if ((n - 3 * i) % 5 == 0) {
-                out.print(((n - 3 * i) / 5) + " " + i);
-                return;
-            }
+        int nn = n;
+        int ones = 0;
+        while (nn > 0) {
+            ones += (nn % 2);
+            nn /= 2;
         }
+
+        out.print(n + ones);
     }
 
     public void run() {

@@ -17,89 +17,54 @@ public class Main {
         PrintWriter out = new PrintWriter(System.out, true);
 
         // solution
-        long lhsX = 0, rhsX = 0, lhsY = 0, rhsY = 0;
-        long plhsX = 0, prhsX = 0, plhsY = 0, prhsY = 0;
-
         int n = in.nextInt();
 
-        long sum = 0;
-        int counterX = 0, counterY = 0;
-        int minusX = 0, minusY = 0;
-        for (int i = 0; i <= n; i++) {
-            int x1 = in.nextInt();
-            int y1 = in.nextInt();
-            int x2 = in.nextInt();
-            int y2 = in.nextInt();
-
-            counterX = 0;
-            minusX = 0;
-            for (int j = x1; j < x2; j++) {
-
-//                System.out.println("j=" + j);
-                int offset = j % 50;
-                long padding = (1L << offset);
-
-                System.out.println("offset=" + offset);
-                long checker = padding & (j < 50 ? lhsX : rhsX);
-                System.out.println("checker=" + checker);
-                if (checker != 0) {
-                    counterX++;
-                } else {
-
-                    if (j < 50) {
-                        lhsX |= padding;
-                        System.out.println("lhs = " + lhsX);
-                    } else {
-                        rhsX |= padding;
-//                        System.out.println("rhs = " + lhsX);
-                    }
-                }
-                if (plhsX != 0 && plhsX == lhsX) {
-                    minusX++;
-                }
-                plhsX = lhsX;
-
-            }
-            System.out.println("counterX = " + counterX);
-            System.out.println("minusX = " + minusX);
-
-
-            counterY = 0;
-            minusY = 0;
-            for (int j = y1; j < y2; j++) {
-
-//                System.out.println("j=" + j);
-                int offset = j % 50;
-                long padding = (1L << offset);
-
-//                System.out.println("offset=" + offset);
-                long checker = padding & (j < 50 ? lhsY : rhsY);
-//                System.out.println("checker=" + checker);
-                if (checker != 0) {
-                    counterY++;
-                } else {
-
-                    if (j < 50) {
-                        lhsY |= padding;
-                        System.out.println("lhs = " + lhsY);
-                    } else {
-                        rhsY |= padding;
-//                        System.out.println("rhs = " + rhsY);
-                    }
-                }
-
-                if (plhsY != 0 && plhsY == lhsY) {
-                    minusY++;
-                }
-                plhsY = lhsY;
-            }
-            System.out.println("counterY = " + counterY);
-            System.out.println("minusY = " + minusY);
-            sum += (counterX * counterY);
-            System.out.println("Cur SUM: " + sum);
+        int[] a = new int[n * 4];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = in.nextInt();
         }
 
-        out.print("SUM: " + sum);
+        int x1 = in.nextInt();
+        int y1 = in.nextInt();
+        int x2 = in.nextInt();
+        int y2 = in.nextInt();
+
+        int minX = Math.min(x1, x2);
+        int maxX = Math.max(x1, x2);
+        int minY = Math.min(y1, y2);
+        int maxY = Math.max(y1, y2);
+
+        int sum = 0;
+        for (int i = 0; i < 4*n; i+=4) {
+            int curX1 = a[i];
+            int curY1 = a[i + 1];
+            int curX2 = a[i + 2];
+            int curY2 = a[i + 3];
+
+            int curMinX = Math.min(curX1, curX2);
+            int curMaxX = Math.max(curX1, curX2);
+            int curMinY = Math.min(curY1, curY2);
+            int curMaxY = Math.max(curY1, curY2);
+
+            int intervalMinX = Math.min(curMinX, minX);
+            int intervalMaxX = Math.max(curMaxX, maxX);
+            int intervalMinY = Math.min(curMinY, minY);
+            int intervalMaxY = Math.max(curMaxY, maxY);
+
+
+            if (intervalMaxX - intervalMinX <= (curMaxX - curMinX) + (maxX - minX) &&
+                    intervalMaxY - intervalMinY <= (curMaxY - curMinY) + (maxY - minY)) {
+
+                int h = ((curMaxX - curMinX) + (maxX - minX)) - (intervalMaxX - intervalMinX);
+                int w = ((curMaxY - curMinY) + (maxY - minY)) - (intervalMaxY - intervalMinY);
+
+                sum += h * w;
+            }
+
+        }
+
+        out.print(sum);
+
         // release resources
         out.close();
     }
