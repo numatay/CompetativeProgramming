@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Created by macnur on 28/01/17.
+ * Created by macnur on 02/12/2017.
  */
 public class Skeleton {
     public static void main(String[] args) {
