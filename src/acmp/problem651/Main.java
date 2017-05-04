@@ -20,47 +20,45 @@ public class Main {
             return;
         }
 
-        int max, min, maxVal, minVal;
+        int maxVal = Math.max(n, m);
+        int minVal = Math.min(n, m);
+        int cnt = 0;
 
-        maxVal = max = Math.max(n, m);
-        minVal = min = Math.min(n, m);
+        for (int i = 2; i <= Math.sqrt(minVal); i++) {
+            while (minVal % i == 0) {
+                minVal /= i;
 
-        int prime = 2;
-        int total = 0;
-        while (maxVal > minVal) {
-            int cnt = 0;
-            while (maxVal % prime == 0) {
-                maxVal /= prime;
+                if (maxVal % i == 0) {
+                    maxVal /= i;
+                } else {
+                    cnt++;
+                }
+            }
+        }
+
+        if (minVal != 1) {
+            if (maxVal % minVal == 0) {
+                maxVal /= minVal;
+            } else {
                 cnt++;
             }
-            if (prime == minVal) {
-                cnt--;
+        }
+
+        for (int i = 2; i <= Math.sqrt(maxVal); i++) {
+            while (maxVal % i == 0) {
+                maxVal /= i;
+                cnt++;
             }
-//            out.println(maxVal + " cannot be divided by " + prime);
-//            out.println(prime + " - " + cnt);
-            total += cnt;
-            prime++;
-//            while(prime * prime <= maxVal) {
-//                prime++;
-//                boolean isPrime = true;
-//                for (int i = 2; i*i <= prime; i++) {
-//                    if (prime % i == 0) {
-//                        isPrime = false;
-//                    }
-//                }
-//                if (isPrime) {
-//                    break;
-//                }
-//            }
         }
 
-//        out.println("prime " + prime + " minVal " + minVal + " maxVal " + maxVal);
-
-        if (prime < minVal) {
-            total++;
+        if (maxVal != 1) {
+            cnt++;
         }
 
-        out.print(total);
+        out.print(cnt);
+
+        // release resources
+        out.close();
     }
 
     public void run() {
